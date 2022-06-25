@@ -1,15 +1,25 @@
-import React from 'react'
-import { useParams } from 'react-router-dom'
+import {useEffect} from 'react'
+import { useParams,useNavigate } from 'react-router-dom'
 import { useFetch } from '../hooks/useFetch';
 
 const Auther = () => {
 
    const {id} = useParams();
-
+   const navigate=useNavigate()
    const url = `http://localhost:3000/article/${id}`
   const { data: article, ispending, error } = useFetch(url)
+
+  useEffect(() => {
+     if (error){
+        setTimeout(()=>{
+          navigate("/")
+        },1000)
+     }
+  }, [error]);
   return (
     <div>
+        {ispending && <div>loading....</div>}
+        {error && <div>{error}</div>}
         { article &&
         <div>
         <h1>{article.title}</h1>

@@ -20,6 +20,7 @@ function App() {
           <Route path="/about" element={<About/>}/>
           <Route path="/contact" element={<Contact/>}/>
           <Route path="/article/:id" element={<Auther/>} />
+          <Route path="*" element={<div><h1>404 not found</h1></div>}/>
         </Routes>
     </div>
   );
